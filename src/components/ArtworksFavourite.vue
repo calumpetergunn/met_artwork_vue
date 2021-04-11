@@ -4,6 +4,7 @@
         <ul>
             <li v-for="artworkFavourite in artworksFavourite">
                 {{artworkFavourite.title}}
+                <!-- <button @click="removeFromFavourites">Remove</button> -->
             </li>
         </ul>
   </section>
@@ -14,8 +15,12 @@ import {eventBus} from '../main.js'
 
 export default {
     name: "artworks-favourite",
-    props: ['artworksFavourite', 'artwork']
-
+    props: ['artworksFavourite', 'artwork'],
+    methods: {
+        // removeFromFavourites() {
+        //     eventBus.$emit('artwork-removed', this.artwork)
+        // }
+    }
 }
 </script>
 

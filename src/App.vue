@@ -11,31 +11,35 @@
     <div>
       <artworks-favourite v-if="artworks.length" :artworksFavourite="artworksFavourite"/>
     </div>
+    <div>
+      <artworks-graph :artworks="artworks"/>
+    </div>
   </div>
 </template>
 
 <script>
 import {eventBus} from './main.js'
 import ArtworksList from './components/ArtworksList.vue'
-// import ArtworksItem from './components/ArtworksItem.vue'
 import ArtworksDetail from './components/ArtworksDetail.vue'
 import ArtworksFavourite from './components/ArtworksFavourite.vue'
 import ArtworksHeader from './components/ArtworksHeader.vue'
+import ArtworksGraph from './components/ArtworksGraph.vue'
 
 export default {
   name: 'App',
   components: {
     "artworks-list": ArtworksList,
-    // "artworks-item": ArtworksItem,
     "artworks-detail": ArtworksDetail,
     "artworks-favourite": ArtworksFavourite,
-    "artworks-header": ArtworksHeader
+    "artworks-header": ArtworksHeader,
+    "artworks-graph": ArtworksGraph
   },
   data () {
     return {
       artworks: [],
       selectedArtwork: null,
-      artworksFavourite: []
+      artworksFavourite: [],
+      artworksYears: []
     }
   },
 
@@ -47,6 +51,8 @@ export default {
     const nestedArtWorks = await Promise.all(promises)
     this.artworks = nestedArtWorks.flat()
     
+
+    
     eventBus.$on('artwork-selected', (artwork) => {
       this.selectedArtwork = artwork;
     })
@@ -55,6 +61,12 @@ export default {
       this.artworksFavourite.push(artwork);
 
     })
+
+
+
+    // eventBus.$on('artwork-removed' (artwork) => {
+    //   this.artworksFavourite.
+    // })
   }
 
 }
@@ -62,11 +74,11 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
   margin-top: 60px;
 }
 
